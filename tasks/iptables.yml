@@ -1,11 +1,12 @@
 ---
-- name: Create NAT table 
-  iptables: table=nat chain=POSTROUTING out_interface={{ output_interface }} jump=MASQUERADE comment="Masquerades {{ output_interface }}" 
+- name: Create NAT table
+  iptables: table=nat chain=POSTROUTING out_interface={{ output_interface }} jump=MASQUERADE comment="Masquerades {{ output_interface }}"
   become: yes
 
-- name: Forward Related and Stablished connections 
+- name: Forward Related and Stablished connections
   iptables: chain=FORWARD in_interface={{ output_interface }} out_interface={{ openvpn_dev }}0 ctstate=ESTABLISHED,RELATED jump=ACCEPT
-  become: yes 
+  become: yes
 
-- name: Forward all traffic via VPN 
+- name: Forward all traffic via VPN
   iptables: chain=FORWARD in_interface={{ output_interface }} out_interface={{ openvpn_dev }}0 jump=ACCEPT
+  become: yes
