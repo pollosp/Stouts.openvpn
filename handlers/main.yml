@@ -1,7 +1,9 @@
 ---
 
 - name: openvpn restart
-  service: name=openvpn state=restarted
+#service: name=openvpn state=restarted
+# FIX SYSTEMD PROBLEMS in DEBIAN NOT TESTED IN CENTOS
+  command: sudo systemctl restart openvpn@server
 
 - name: openvpn pack clients
   command: tar cvzf {{openvpn_keydir}}/{{item.item}}.tar.gz -C {{openvpn_keydir}} {{item.item}}.crt {{item.item}}.key {{item.item}}.ovpn ca.crt
