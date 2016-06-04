@@ -10,5 +10,8 @@
 
 - include: configure.yml
 
+- include: iptables.yml
+  when: openvpn_route_all_traffic == 'yes'  
+
 - name: Ensure OpenVPN is started
   service: name=openvpn state=started enabled=yes

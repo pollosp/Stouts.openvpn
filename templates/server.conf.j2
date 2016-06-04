@@ -149,6 +149,12 @@ script-security 3 execve
 {{option}}
 {% endfor %}
 
+{% if openvpn_route_all_traffic %}
+push "redirect-gateway def1"
+push "remote-gateway {{ openvpn_public_ip }}"
+push "dhcp-option DNS {{ openvpn_push_dns  }}"
+{% endif %} 
+
 {% if openvpn_clients_revoke|length > 0  or crl_pem_file.stat.exists %}
 crl-verify {{openvpn_keydir}}/crl.pem
 {% endif %}

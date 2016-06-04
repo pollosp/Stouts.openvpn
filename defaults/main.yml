@@ -10,6 +10,10 @@ openvpn_host: "{{inventory_hostname}}"              # The server address
 openvpn_port: 1194
 openvpn_proto: udp
 openvpn_dev: tun
+output_interface: eth0                              # Nat output interface 
+openvpn_route_all_traffic: yes                      # Route all traffic via internet
+openvpn_push_dns: 8.8.8.8
+openvpn_public_ip: 6.6.6.6
 openvpn_server: 10.8.0.0 255.255.255.0              # Set empty for skip
 openvpn_max_clients: 100
 openvpn_log: /var/log/openvpn.log                   # Log's directory
@@ -24,7 +28,6 @@ openvpn_group: nogroup
 openvpn_resolv_retry: infinite
 openvpn_client_to_client: yes
 openvpn_server_options: []                          # Additional server options
-                                                    # openvpn_server_options:
                                                     # - dev-node MyTap
                                                     # - client-to-client
 openvpn_client_options: []                          # Additional client options
